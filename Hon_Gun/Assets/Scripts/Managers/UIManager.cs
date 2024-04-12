@@ -39,6 +39,7 @@ public class UIManager
     {
         Canvas canvas = _go.GetOrAddComponent<Canvas>();
         Camera camera = GameObject.FindObjectOfType<Camera>();
+        Debug.Log(camera);
         canvas.renderMode = RenderMode.ScreenSpaceCamera;
         canvas.worldCamera = camera;
         canvas.overrideSorting = true;
@@ -65,7 +66,7 @@ public class UIManager
 
         GameObject go = Managers.Resource.Instantiate($"UI/Scene/{_name}");
 
-        T sceneUI = Util.GetOrAddComponent<T>(go);
+        T sceneUI = go.GetOrAddComponent<T>();
         this.sceneUI = sceneUI;
 
         go.transform.SetParent(Root().transform);
@@ -86,7 +87,7 @@ public class UIManager
 
         go.transform.SetParent(Root().transform);
 
-        T popup = Util.GetOrAddComponent<T>(go);
+        T popup = go.GetOrAddComponent<T>();
         PopupUIGroup popupType = popup.PopupID;
 
         if(!_popupStackDict.ContainsKey(popupType))

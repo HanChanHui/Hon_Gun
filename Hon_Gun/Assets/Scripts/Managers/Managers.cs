@@ -23,10 +23,6 @@ public class Managers : MonoBehaviour
         Init();
     }
 
-    private void OnDisable()
-    {
-        Clear();
-    }
 
     private static void Init()
     {

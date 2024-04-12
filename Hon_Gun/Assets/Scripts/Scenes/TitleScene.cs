@@ -9,7 +9,7 @@ public class TitleScene : BaseScene
     protected override void Init()
     {
         base.Init();
-        Debug.Log("½ÇÇà");
+
         Managers.UI.ShowSceneUI<UI_Title>();
     }
 

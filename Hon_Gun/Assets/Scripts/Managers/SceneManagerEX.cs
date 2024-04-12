@@ -1,9 +1,9 @@
 using Consts;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneManagerEX : MonoBehaviour
 {
@@ -31,13 +31,18 @@ public class SceneManagerEX : MonoBehaviour
             return instance;
         }
     }
+    [SerializeField]
+    public CanvasGroup barCanvasGroup;
+    [SerializeField]
+    public CanvasGroup fadeCanvasGroup;
+    [SerializeField]
+    private Image progressBar;
 
-    public CanvasGroup canvasGroup;
+
     private string _loadSceneName;
 
     private static SceneManagerEX Create()
     {
-        Debug.Log("¤¾¤·");
         return Instantiate(Resources.Load<SceneManagerEX>("UI/UI_Loading"));
     }
 
@@ -64,22 +69,31 @@ public class SceneManagerEX : MonoBehaviour
 
     IEnumerator LoadSceneProcess()
     {
-        yield return StartCoroutine(Fade(true));
-
+        progressBar.fillAmount = 0f;
+        yield return StartCoroutine(Fade(barCanvasGroup, true, 2f));
         AsyncOperation op = SceneManager.LoadSceneAsync(_loadSceneName);
         op.allowSceneActivation = false;
 
+        float timer = 0f;
         while(!op.isDone)
         {
             yield return null;
             if(op.progress > 0.9f)
             {
-
+                progressBar.fillAmount = op.progress;
             }
             else
             {
-                op.allowSceneActivation = true;
-                yield break;
+                timer += Time.unscaledDeltaTime;
+                progressBar.fillAmount = Mathf.Lerp(0.9f, 1f, timer);
+                
+                if (progressBar.fillAmount >= 1f)
+                {
+                    StartCoroutine(Fade(fadeCanvasGroup, true, 2f));
+                    yield return new WaitForSeconds(0.8f);
+                    op.allowSceneActivation = true;
+                    yield break;
+                }
             }
         }
     }
@@ -89,31 +103,34 @@ public class SceneManagerEX : MonoBehaviour
     {
         if (arg0.name == _loadSceneName)
         {
-            StartCoroutine(Fade(false));
+            StartCoroutine(Fade(barCanvasGroup, false, 2f));
+            StartCoroutine(Fade(fadeCanvasGroup, false, 2f));
+
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
 
-    IEnumerator Fade(bool isFadeIn)
+    IEnumerator Fade(CanvasGroup _cg, bool _isFadeIn, float _time)
     {
-        if(!isFadeIn)
+        if(!_isFadeIn)
         {
-            yield return new WaitForSeconds(0.2f);
+            //yield return new WaitForSeconds(0.2f);
         }
 
         float timer = 0f;
         while(timer <= 1f)
         {
             yield return null;
-            timer += Time.unscaledDeltaTime * 2f;
-            canvasGroup.alpha = isFadeIn ? Mathf.Lerp(0f, 1f, timer) : Mathf.Lerp(1f, 0f, timer);
+            timer += Time.unscaledDeltaTime * _time;
+            _cg.alpha = _isFadeIn ? Mathf.Lerp(0f, 1f, timer) : Mathf.Lerp(1f, 0f, timer);
         }
 
-        if(!isFadeIn)
+        if(!_isFadeIn)
         {
             gameObject.SetActive(false);
         }
     }
+
 
     private string GetSceneName(ScenesType type)
     {

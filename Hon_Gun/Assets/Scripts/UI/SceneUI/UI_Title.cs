@@ -13,12 +13,14 @@ public class UI_Title : UI_Scene
 
     public override void Init()
     {
-        Bind<Image>(typeof(Images));
+        base.Init();
+
+        Bind<Image>(typeof(TitleImages));
         Bind<TextMeshProUGUI>(typeof(TextMeshProUGUIs));
         Bind<Button>(typeof(Buttons));
 
         GetText((int)TextMeshProUGUIs.FrontImage).gameObject.SetActive(true);
-        GetImage((int)Images.BackgroundImg).gameObject.SetActive(true);
+        GetImage((int)TitleImages.BackgroundImg).gameObject.SetActive(true);
         GetButton((int)Buttons.StartBtn).gameObject.SetActive(true);
         GetButton((int)Buttons.StartBtn).gameObject.AddUIEvent(SetPresstoStart);
     }
