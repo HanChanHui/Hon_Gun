@@ -24,11 +24,6 @@ namespace Consts
         BackgroundImg,
     }
 
-    public enum EquipImages
-    {
-        WeaponImg_1, WeaponImg_2, WeaponImg_3, WeaponImg_4, WeaponImg_5, WeaponImg_6, WeaponImg_7, WeaponImg_8,
-    }
-
     public enum TextMeshProUGUIs
     {
         FrontImage,
@@ -38,9 +33,26 @@ namespace Consts
     {
         StartBtn,
         BattleStartBtn,
-        Weapon_1, Weapon_2, Weapon_3, Weapon_4, Weapon_5, Weapon_6, Weapon_7,Weapon_8,
+    }
 
+    public enum EquipButtons
+    {
+        WeaponBtn_1, WeaponBtn_2, WeaponBtn_3, WeaponBtn_4, WeaponBtn_5, WeaponBtn_6, WeaponBtn_7, WeaponBtn_8,
+    }
 
+    public enum EquipImages
+    {
+        WeaponImg_1, WeaponImg_2, WeaponImg_3, WeaponImg_4, WeaponImg_5, WeaponImg_6, WeaponImg_7, WeaponImg_8,
+    }
+
+    public enum SelectGroups
+    {
+        SelectGroup,
+    }
+
+    public enum SelectWeaponEquip
+    {
+        WeaponEquip,
     }
 
 }

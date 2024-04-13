@@ -36,7 +36,7 @@ public class MemoryPoolManager
         {
             GameObject go = Object.Instantiate(original);
             go.name = original.name;
-            return Util.GetOrAddComponent<MemoryPoolable>(go);
+            return go.GetOrAddComponent<MemoryPoolable>();
         }
         /// <summary>
         /// 오브젝트 풀에 넣기.(오브젝트 비활성화 상태)
