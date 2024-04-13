@@ -55,6 +55,30 @@ public class UIManager
     }
 
     /// <summary>
+    /// World 에 오브젝트 캔버스 가져오기
+    /// </summary>
+    public T MakeWorldSpaceUI<T>(Transform parent, string name = null) where T : UI_Base
+    {
+        if (string.IsNullOrEmpty(name))
+        {
+            name = typeof(T).Name;
+        }
+
+        GameObject go = Managers.Resource.Instantiate($"UI/WorldSpace/{name}");
+
+        if (parent != null)
+        {
+            go.transform.SetParent(parent);
+        }
+
+        Canvas canvas = go.GetComponent<Canvas>();
+        canvas.renderMode = RenderMode.WorldSpace;
+        canvas.worldCamera = Camera.main;
+
+        return go.GetOrAddComponent<T>();
+    }
+
+    /// <summary>
     /// 고정 UI 생성
     /// </summary>
     public T ShowSceneUI<T>(string _name = null) where T : UI_Scene

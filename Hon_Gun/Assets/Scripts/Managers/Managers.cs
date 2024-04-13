@@ -10,17 +10,24 @@ public class Managers : MonoBehaviour
     private MemoryPoolManager memoryPool = new MemoryPoolManager();
     private ResourceManager resource = new ResourceManager();
     private UIManager ui = new UIManager();
+    private InputManager input = new InputManager();
 
 
     public static MemoryPoolManager MemoryPool => Instance.memoryPool;
     public static ResourceManager Resource => Instance.resource;
     public static UIManager UI => Instance.ui;
+    public static InputManager Input => Instance.input;
 
     #endregion
 
     private void Awake()
     {
         Init();
+    }
+
+    private void FixedUpdate()
+    {
+        input.OnUpdate();
     }
 
 

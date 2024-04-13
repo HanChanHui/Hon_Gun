@@ -4,6 +4,23 @@ using UnityEngine;
 
 namespace Consts
 {
+    public enum WorldObject
+    {
+        None,
+        Player,
+        Enemy,
+    }
+
+
+
+    public enum EnemysType
+    {
+        None,
+        Enemy,
+        
+    }
+
+
     public enum ScenesType
     {
         None,
@@ -12,11 +29,16 @@ namespace Consts
         BattleScene,
     }
 
+    public enum CameraMode
+    {
+        Node,
+        TopView,
+
+    }
+
     public enum PopupUIGroup
     {
         None,
-
-
     }
 
     public enum TitleImages
