@@ -52,7 +52,7 @@ public class UIManager
     }
 
     /// <summary>
-    /// World 에 오브젝트 캔버스 가져오기
+    /// 월드 UI 생성
     /// </summary>
     public T MakeWorldSpaceUI<T>(Transform parent, string name = null) where T : UI_Base
     {
@@ -105,7 +105,6 @@ public class UIManager
         }
 
         GameObject go = Managers.Resource.Instantiate($"UI/Popup/{_name}");
-
         go.transform.SetParent(Root().transform);
 
         T popup = go.GetOrAddComponent<T>();

@@ -10,22 +10,12 @@ public partial class Player : Entity
     private void Start()
     {
         InputEvent();
-        HPEvent();
-    }
-
-    private void OnEnable()
-    {
-        
-    }
-
-    private void FixedUpdate()
-    {
-        
+        WorldHp();
     }
 
     private void Update()
     {
-        
+        Attack();
     }
 
 
@@ -38,6 +28,14 @@ public partial class Player : Entity
         stat.MoveSpeed = Data.MoveSpeed;
         stat.Damage = Data.Damage;
         stat.AttackSpeed = Data.AttackSpeed;
+    }
+
+    private void WorldHp()
+    {
+        if (gameObject.GetComponentInChildren<UI_HPBar>() == null)
+        {
+            Managers.UI.MakeWorldSpaceUI<UI_HPBar>(transform);
+        }
     }
 
 }

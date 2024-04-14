@@ -70,13 +70,13 @@ public partial class Player : Entity
     /// <summary>
     /// 플레이어 데미지 및 죽음 구현
     /// </summary>
-    private void OnCollisionStay(Collision col)
+    private void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.tag == "Enemy")
+        if (col.gameObject.tag == "EnemyBullet")
         {
-            if(col.collider.TryGetComponent(out EnemyStat enemy))
+            if (col.collider.TryGetComponent(out Projectile bullet))
             {
-                OnDamaged(enemy.GetComponent<EnemyStat>().Damage);
+                OnDamaged(bullet.GetComponent<Projectile>().Damage);
             }
         }
     }
@@ -87,7 +87,6 @@ public partial class Player : Entity
     public override void OnDamaged(int damage, float force = 0)
     {
         stat.HP -= Mathf.Max(damage, 1);
-        OnPlayerHPCheck?.Invoke();
         OnDead();
     }
 
@@ -98,9 +97,12 @@ public partial class Player : Entity
     {
         if(stat.HP <= 0)
         {
-            transform.GetComponent<CapsuleCollider2D>().enabled = false;
+            transform.GetComponent<CapsuleCollider>().enabled = false;
+            Destroy(gameObject);
             stat.HP = 0;
-            //Managers.UI.ShowPopupUI<>();
+            Managers.UI.ShowPopupUI<UI_Fail>();
         }
     }
+
+    public int GetStatDamage() => stat.Damage;
 }

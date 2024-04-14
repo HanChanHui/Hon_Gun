@@ -10,38 +10,57 @@ public class UI_HPBar : UI_Base
     [SerializeField]
     private Slider slider;
     [SerializeField]
-    private Player player;
+    private Stat stat;
 
     public override void Init()
     {
         Bind<GameObject>(typeof(PlayerHPBar));
-        player = GetComponent<Player>();
-
-
-        player.OnPlayerHPCheck -= HPStateSlider;
-        player.OnPlayerHPCheck += HPStateSlider;
-
 
         slider = GetObject((int)PlayerHPBar.HpBar).GetComponent<Slider>();
-        player.HpState(slider);
-
     }
 
+    private void Start()
+    {
+        stat = transform.parent.GetComponent<Stat>();
+
+        Transform parent = transform.parent;
+        transform.position = parent.position + new Vector3(0, 1.8f, 0);
+    }
 
     private void Update()
     {
-        Transform parent = transform.parent;
-        transform.position = parent.position + new Vector3(0, 1.3f, 0);
+        if(slider != null)
+        {
+            HpState(slider);
+        }
     }
 
-    private void HPStateSlider()
+    public void HpState(Slider _hpBar)
     {
-        player.HpState(slider);
+        if (stat.HP > stat.MaxHP)
+        {
+            stat.HP = stat.MaxHP;
+        }
+        float ratio = stat.HP;
+        _hpBar.value = SetHpRatio(ratio);
     }
 
-    private void OnDisable()
+    /// <summary>
+    /// 플레이어의 HP 비율
+    /// </summary>
+    private float SetHpRatio(float _ratio)
     {
-        player.OnPlayerHPCheck -= HPStateSlider;
+        if (_ratio < 0)
+        {
+            _ratio = 0;
+        }
+        if (_ratio > 100)
+        {
+            _ratio = 100;
+        }
+
+        return _ratio;
     }
+
 
 }

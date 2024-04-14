@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(mode == CameraMode.TopView)
+        if(mode == CameraMode.TopView && player != null)
         {
             RaycastHit hit;
             if (Physics.Raycast(player.transform.position, delta, out hit, delta.magnitude, LayerMask.GetMask("Wall")))

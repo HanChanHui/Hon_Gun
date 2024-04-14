@@ -12,12 +12,21 @@ namespace Consts
     }
 
 
-
     public enum EnemysType
     {
         None,
-        Enemy,
-        
+        Enemy_1,
+        Enemy_2,
+        Enemy_3,
+    }
+
+    public enum States
+    {
+        None,
+        Move,
+        Attack,
+        Hit,
+        Die,
     }
 
 
@@ -39,6 +48,9 @@ namespace Consts
     public enum PopupUIGroup
     {
         None,
+        UI_Success,
+        UI_Fail,
+
     }
 
     public enum TitleImages
@@ -55,6 +67,7 @@ namespace Consts
     {
         StartBtn,
         BattleStartBtn,
+        CheckButton,
     }
 
     public enum PlayerHPBar
@@ -85,5 +98,4 @@ namespace Consts
     {
         WeaponEquip,
     }
-
 }

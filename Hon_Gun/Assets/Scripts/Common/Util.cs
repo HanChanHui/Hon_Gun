@@ -72,6 +72,24 @@ public partial class Util
         return null;
     }
 
+    /// <summary>
+    /// 원하는 Layer가 있는지 확인 후, 인덱스 반환.
+    /// </summary>
+    public static int MaskToLayer(LayerMask mask)
+    {
+        var bitmask = mask.value;
+
+        UnityEngine.Assertions.Assert.IsFalse((bitmask & (bitmask - 1)) != 0,
+            "MaskToLayer() was passed an invalid mask containing multiple layers.");
+
+        int result = bitmask > 0 ? 0 : 31;
+        while(bitmask > 1)
+        {
+            bitmask = bitmask >> 1;
+            result++;
+        }
+        return result;
+    }
 
 
 }
