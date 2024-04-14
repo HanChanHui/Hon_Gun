@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
 
 
     [SerializeField]
-    Vector3 delta;
+     Vector3 delta;
     [SerializeField]
     GameObject player;
 

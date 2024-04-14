@@ -10,6 +10,7 @@ public class BattleScene : BaseScene
     {
         base.Init();
 
+        GameManager.Instance.Init();
         Managers.UI.ShowSceneUI<UI_Battle>();
     }
 

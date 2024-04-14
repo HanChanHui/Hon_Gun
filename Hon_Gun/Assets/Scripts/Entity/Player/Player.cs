@@ -10,7 +10,7 @@ public partial class Player : Entity
     private void Start()
     {
         InputEvent();
-
+        HPEvent();
     }
 
     private void OnEnable()
@@ -34,6 +34,7 @@ public partial class Player : Entity
         stat = GetComponent<PlayerStat>();
 
         stat.MaxHP = Data.MaxHp;
+        stat.HP = Data.MaxHp;
         stat.MoveSpeed = Data.MoveSpeed;
         stat.Damage = Data.Damage;
         stat.AttackSpeed = Data.AttackSpeed;

@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public partial class Player : Entity
 {
+
     private Animator _anim;
     public Animator Anim
     {
@@ -31,7 +33,6 @@ public partial class Player : Entity
     }
 
     
-
     private void InputEvent()
     {
         Managers.Input.keyAction -= Movement;
@@ -86,7 +87,7 @@ public partial class Player : Entity
     public override void OnDamaged(int damage, float force = 0)
     {
         stat.HP -= Mathf.Max(damage, 1);
-        HpState();
+        OnPlayerHPCheck?.Invoke();
         OnDead();
     }
 

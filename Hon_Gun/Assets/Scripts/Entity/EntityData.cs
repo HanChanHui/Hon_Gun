@@ -10,10 +10,6 @@ public class EntityData : ScriptableObject
     public string EntityName => entityName;
 
     [SerializeField]
-    private int hp;
-    public int Hp => hp;
-
-    [SerializeField]
     private int maxHp;
     public int MaxHp => maxHp;
 

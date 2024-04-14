@@ -38,10 +38,7 @@ public class UIManager
     public void SetCanvas(GameObject _go, bool _sorting = false)
     {
         Canvas canvas = _go.GetOrAddComponent<Canvas>();
-        Camera camera = GameObject.FindObjectOfType<Camera>();
-        Debug.Log(camera);
-        canvas.renderMode = RenderMode.ScreenSpaceCamera;
-        canvas.worldCamera = camera;
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
         canvas.overrideSorting = true;
 
         if (_sorting)

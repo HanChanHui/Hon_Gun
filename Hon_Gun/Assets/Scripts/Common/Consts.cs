@@ -57,6 +57,15 @@ namespace Consts
         BattleStartBtn,
     }
 
+    public enum PlayerHPBar
+    {
+        HpBar,
+    }
+    public enum HpSlider
+    {
+        UI_HpBar,
+    }
+
     public enum EquipButtons
     {
         WeaponBtn_1, WeaponBtn_2, WeaponBtn_3, WeaponBtn_4, WeaponBtn_5, WeaponBtn_6, WeaponBtn_7, WeaponBtn_8,

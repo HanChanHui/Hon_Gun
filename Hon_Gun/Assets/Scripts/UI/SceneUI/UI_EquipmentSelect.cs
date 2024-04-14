@@ -62,6 +62,7 @@ public class UI_EquipmentSelect : UI_Scene
     public void SelectWeaponImg(int i)
     {
         selectImg.sprite = weaponImg[i];
+        Managers.Data.SetWeaponData(i);
     }
 
     void SetPresstoStart(PointerEventData data)
