@@ -10,14 +10,12 @@ public class Managers : MonoBehaviour
     private MemoryPoolManager memoryPool = new MemoryPoolManager();
     private ResourceManager resource = new ResourceManager();
     private UIManager ui = new UIManager();
-    private InputManager input = new InputManager();
     private DataManager data = new DataManager();
 
 
     public static MemoryPoolManager MemoryPool => Instance.memoryPool;
     public static ResourceManager Resource => Instance.resource;
     public static UIManager UI => Instance.ui;
-    public static InputManager Input => Instance.input;
     public static DataManager Data => Instance.data;
 
     #endregion
@@ -26,12 +24,6 @@ public class Managers : MonoBehaviour
     {
         Init();
     }
-
-    private void FixedUpdate()
-    {
-        input.OnUpdate();
-    }
-
 
     private static void Init()
     {

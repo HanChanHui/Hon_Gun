@@ -23,7 +23,7 @@ public class UI_EquipmentSelect : UI_Scene
         base.Init();
 
        //Bind<Image>(typeof(EquipImages));
-        Bind<TextMeshProUGUI>(typeof(TextMeshProUGUIs));
+        //Bind<Text>(typeof(Texts));
         Bind<Image>(typeof(SelectWeaponEquip));
         Bind<GameObject>(typeof(SelectGroups));
         Bind<Button>(typeof(Buttons));
@@ -31,14 +31,16 @@ public class UI_EquipmentSelect : UI_Scene
         selectImg = GetImage((int)SelectWeaponEquip.WeaponEquip);
         selectGroup = GetObject((int)SelectGroups.SelectGroup).gameObject;
         GetButton((int)Buttons.BattleStartBtn).gameObject.AddUIEvent(SetPresstoStart);
-        
+
         SetWeaponImg();
+        SelectWeaponImg(0);
     }
 
     private void SetWeaponImg()
     {
         int count = System.Enum.GetValues(typeof(EquipImages)).Length;
         weaponImg = new Sprite[count];
+
         for (int i = 0; i < count; i++)
         {
             GameObject btn = Managers.Resource.Instantiate(Path.EquipButton);
@@ -67,6 +69,7 @@ public class UI_EquipmentSelect : UI_Scene
 
     void SetPresstoStart(PointerEventData data)
     {
+        GameManager.Instance.SetStage();
         SceneManagerEX.Instance.LoadScene(ScenesType.BattleScene);
     }
 

@@ -59,7 +59,7 @@ public abstract class UI_Base : MonoBehaviour
 
     protected GameObject GetObject(int _idx) { return Get<GameObject>(_idx);  }
     protected Image GetImage(int _idx) { return Get<Image>(_idx); }
-    protected TextMeshProUGUI GetText(int _idx) { return Get<TextMeshProUGUI>(_idx); }
+    protected Text GetText(int _idx) { return Get<Text>(_idx); }
     protected Button GetButton(int _idx) { return Get<Button>(_idx); }
     protected Slider GetSlider(int _idx) { return Get<Slider>(_idx); }
 

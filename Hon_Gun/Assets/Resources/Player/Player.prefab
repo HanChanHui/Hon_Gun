@@ -42,7 +42,7 @@ PrefabInstance:
     - target: {fileID: 7673487250857332701, guid: c98043d57e0190845b790d7b92990bee, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9100000, guid: b905472e49f6bd8478c36122116e7125, type: 2}
     - target: {fileID: 7673487251499248672, guid: c98043d57e0190845b790d7b92990bee, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -221,7 +221,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7673487251499248760, guid: c98043d57e0190845b790d7b92990bee, type: 3}
       propertyPath: m_Name
-      value: Player Variant
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7673487251499248760, guid: c98043d57e0190845b790d7b92990bee, type: 3}
       propertyPath: m_Layer
@@ -413,9 +413,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 126
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &1572281971440007183
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -435,10 +435,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2.0498536
+  m_Radius: 0.60415804
+  m_Height: 2.0883963
   m_Direction: 1
-  m_Center: {x: 0, y: 1.031732, z: 0}
+  m_Center: {x: 0.017619252, y: 1.0510033, z: 0}
 --- !u!114 &8200649937426442253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,10 +455,11 @@ MonoBehaviour:
   type: 1
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 18432
   bulletPrefab: {fileID: 434096261491556458, guid: ec0a16121cb4c0f46a0528e712fe0172, type: 3}
   reloadTime: 0
   bulletPos: {fileID: 4455540518561621910}
+  anim: {fileID: 0}
 --- !u!114 &6096720234145284764
 MonoBehaviour:
   m_ObjectHideFlags: 0

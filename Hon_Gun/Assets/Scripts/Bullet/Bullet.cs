@@ -7,16 +7,8 @@ public class Bullet : Projectile
         Destroy(gameObject);
     }
 
-    protected override void OnEnterProcess(Collider2D other)
+    protected override void OnEnterProcess(Collision other)
     {
-        if(other.TryGetComponent(out Enemy enemy))
-        {
-            ReturnObject();
-        }
-
-        if(other.TryGetComponent(out Player player))
-        {
-            ReturnObject();
-        }
+        ReturnObject();
     }
 }

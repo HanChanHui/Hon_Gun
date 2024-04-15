@@ -14,10 +14,13 @@ public class UI_Success : UI_Popup
         Bind<Button>(typeof(Buttons));
 
         GetButton((int)Buttons.CheckButton).gameObject.AddUIEvent(OnPresstoNext);
+        GameManager.Instance.Clear();
     }
 
     private void OnPresstoNext(PointerEventData data)
     {
+        
+        GameManager.Instance.GameEndTimeStop(1);
         SceneManagerEX.Instance.LoadScene(ScenesType.EquipmentSelectScene);
     }
 

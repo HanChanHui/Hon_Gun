@@ -4,12 +4,11 @@ using UnityEngine;
 
 public partial class Player : Entity
 {
-
+   
     protected PlayerStat stat;
 
     private void Start()
     {
-        InputEvent();
         WorldHp();
     }
 
@@ -18,10 +17,17 @@ public partial class Player : Entity
         Attack();
     }
 
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
 
     protected override void Init()
     {
         stat = GetComponent<PlayerStat>();
+        anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
 
         stat.MaxHP = Data.MaxHp;
         stat.HP = Data.MaxHp;

@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public partial class GameManager
 {
@@ -11,17 +10,8 @@ public partial class GameManager
     [SerializeField]
     private GameObject player;
     public GameObject GetPlayer() => player;
-    private IEnumerator InGameStart()
-    {
-        if (player == null)
-        {
-            player = GameObject.FindWithTag("Player");
-        }
-        yield return null;
-    }
 
     private HashSet<GameObject> enemy = new HashSet<GameObject>();
-    public Action<int> _OnSpawnEvent;
 
     public GameObject Spawn(WorldObject type, string path, Transform parent = null)
     {
@@ -33,7 +23,6 @@ public partial class GameManager
                 break;
             case WorldObject.Enemy:
                 enemy.Add(go);
-                _OnSpawnEvent.Invoke(1);
                 break;
             case WorldObject.Player:
                 player = go;
@@ -43,6 +32,7 @@ public partial class GameManager
         return go;
 
     }
+
 
     public WorldObject GetWorldObjectType(GameObject go)
     {
@@ -72,8 +62,7 @@ public partial class GameManager
                     if (enemy.Contains(go))
                     {
                         enemy.Remove(go);
-                        if (_OnSpawnEvent != null)
-                            _OnSpawnEvent.Invoke(-1);
+                        inGameData.killCount += 1;
                     }
                 }
                 break;
@@ -81,11 +70,18 @@ public partial class GameManager
         Managers.Resource.Destroy(go, time);
     }
 
+    private void ClearEnemy()
+    {
+        if (enemy == null) return;
+        foreach (var _enemy in enemy)
+        {
+            Destroy(_enemy);
+        }
+    }
+
     public void Clear()
     {
-        Spawner spanwer = player.GetComponentInChildren<Spawner>();
-        spanwer.gameObject.SetActive(false);
-
+        ClearEnemy();
         enemy.Clear();
         Despawn(player);
     }

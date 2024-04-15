@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8831a15599850e40bb588159f130ae8, type: 3}
-  m_Name: EnemyData_3
+  m_Script: {fileID: 11500000, guid: 5f567087889011f44b690fca6443235f, type: 3}
+  m_Name: InGameData
   m_EditorClassIdentifier: 
-  entityName: Enemy_3
-  maxHp: 100
-  damage: 10
-  moveSpeed: 6
-  attackSpeed: 15
+  stageName: "\uC2A4\uD14C\uC774\uC9C01"
+  enemyKillCount: 20

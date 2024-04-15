@@ -126,7 +126,7 @@ public class MemoryPoolManager
     /// <summary>
     /// pool을 생성 및 Dictionary에 추가.
     /// </summary>
-    public void CreatePool(GameObject _original, int _count = 100)
+    public void CreatePool(GameObject _original, int _count = 10)
     {
         MemoryPooling pool = new MemoryPooling();
         pool.Init(_original, _count);

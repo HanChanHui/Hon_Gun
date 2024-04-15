@@ -70,9 +70,11 @@ public class SceneManagerEX : MonoBehaviour
     IEnumerator LoadSceneProcess()
     {
         progressBar.fillAmount = 0f;
-        yield return StartCoroutine(Fade(barCanvasGroup, true, 2f));
+        yield return StartCoroutine(Fade(fadeCanvasGroup, true, 2f));
+         
         AsyncOperation op = SceneManager.LoadSceneAsync(_loadSceneName);
         op.allowSceneActivation = false;
+        StartCoroutine(Fade(barCanvasGroup, true, 2f));
 
         float timer = 0f;
         while(!op.isDone)
@@ -89,9 +91,10 @@ public class SceneManagerEX : MonoBehaviour
                 
                 if (progressBar.fillAmount >= 1f)
                 {
-                    StartCoroutine(Fade(fadeCanvasGroup, true, 2f));
-                    yield return new WaitForSeconds(0.8f);
+                    
+                    yield return new WaitForSeconds(0.3f);
                     op.allowSceneActivation = true;
+                    
                     yield break;
                 }
             }
@@ -103,7 +106,7 @@ public class SceneManagerEX : MonoBehaviour
     {
         if (arg0.name == _loadSceneName)
         {
-            StartCoroutine(Fade(barCanvasGroup, false, 2f));
+            barCanvasGroup.alpha = 0f;
             StartCoroutine(Fade(fadeCanvasGroup, false, 2f));
 
             SceneManager.sceneLoaded -= OnSceneLoaded;

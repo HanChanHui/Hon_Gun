@@ -5,66 +5,77 @@ using UnityEngine;
 
 public partial class Player : Entity
 {
-
-    private Animator _anim;
+    [SerializeField]
+    private Animator anim;
     public Animator Anim
     {
         get
         {
-            if (_anim == null)
+            if (anim == null)
             {
-                _anim = GetComponent<Animator>();
+                anim = GetComponent<Animator>();
             }
-            return _anim;
+            return anim;
         }
     }
 
-    private Rigidbody2D _rb;
-    public Rigidbody2D RigBody
+    private Rigidbody rb;
+    public Rigidbody RigBody
     {
         get
         {
-            if (_rb == null)
+            if (rb == null)
             {
-                _rb = GetComponent<Rigidbody2D>();
+                rb = GetComponent<Rigidbody>();
             }
-            return _rb;
+            return rb;
         }
     }
 
-    
-    private void InputEvent()
-    {
-        Managers.Input.keyAction -= Movement;
-        Managers.Input.keyAction += Movement;
-    }
+    Vector3 movepos;
+
+    Vector3 startPos;
+    Vector3 endPos;
+
+
+    float hAxis;
+    float vAxis;
 
     /// <summary>
-    /// 플레이어 움직임 구현
+    /// 플레이어 이동.
     /// </summary>
-    private void Movement()
+    private void Move()
     {
-        if(Input.GetKey(KeyCode.W))
+        hAxis = Input.GetAxisRaw("Horizontal");
+        vAxis = Input.GetAxisRaw("Vertical");
+        movepos = new Vector3(hAxis, 0, vAxis).normalized;
+        if (!CheckHitWall(movepos))
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), 0.2f);
-            transform.position += Vector3.forward * Time.deltaTime * stat.MoveSpeed;
+            movepos = Vector3.zero;
         }
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.back), 0.2f);
-            transform.position += Vector3.back * Time.deltaTime * stat.MoveSpeed;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.left), 0.2f);
-            transform.position += Vector3.left * Time.deltaTime * stat.MoveSpeed;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.right), 0.2f);
-            transform.position += Vector3.right * Time.deltaTime * stat.MoveSpeed;
-        }
+        
+        transform.position += movepos * stat.MoveSpeed * Time.deltaTime;
 
+        if(movepos != Vector3.zero)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movepos), 20f * Time.deltaTime);
+        }
+        
+        anim.SetBool("IsWalk", movepos != Vector3.zero);
+    }
+    /// <summary>
+    /// 벽이 있는지 확인.
+    /// </summary>
+    private bool CheckHitWall(Vector3 _move)
+    {
+        if(Physics.Raycast(transform.position, _move, out RaycastHit hit, 0.7f))
+        {
+            if(hit.collider.CompareTag("Wall"))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     /// <summary>
@@ -98,7 +109,7 @@ public partial class Player : Entity
         if(stat.HP <= 0)
         {
             transform.GetComponent<CapsuleCollider>().enabled = false;
-            Destroy(gameObject);
+            GameManager.Instance.GameEndTimeStop(0);
             stat.HP = 0;
             Managers.UI.ShowPopupUI<UI_Fail>();
         }

@@ -34,9 +34,6 @@ public partial class Enemy : Entity
             case States.Move:
                 TypeMovement(enemysType);
                 break;
-            case States.Hit:
-                //OnDamaged();
-                break;
             case States.Die:
                 OnDead();
                 break;
@@ -50,6 +47,7 @@ public partial class Enemy : Entity
     {
         stat = GetComponent<EnemyStat>();
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
 
         stat.EnemyType = enemysType;
         stat.MaxHP = Data.MaxHp;

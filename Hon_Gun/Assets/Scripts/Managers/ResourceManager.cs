@@ -32,7 +32,7 @@ public class ResourceManager
     /// <summary>
     /// Load 함수를 통해 받은 프리팹을 통해 오브젝트를 생성.
     /// </summary>
-    public GameObject Instantiate(string _path, Transform _parent = null)
+    public GameObject Instantiate(string _path, Transform _parent = null, Vector3 pos = default)
     {
         GameObject original = Load<GameObject>($"{_path}");
 

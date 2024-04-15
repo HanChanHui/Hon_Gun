@@ -15,5 +15,5 @@ MonoBehaviour:
   entityName: Enemy_2
   maxHp: 100
   damage: 10
-  moveSpeed: 2
+  moveSpeed: 3
   attackSpeed: 15

@@ -24,7 +24,6 @@ namespace Consts
     {
         None,
         Move,
-        Attack,
         Hit,
         Die,
     }
@@ -58,16 +57,19 @@ namespace Consts
         BackgroundImg,
     }
 
-    public enum TextMeshProUGUIs
-    {
-        FrontImage,
-    }
 
     public enum Buttons
     {
         StartBtn,
         BattleStartBtn,
         CheckButton,
+        SpawnTimeUp,
+    }
+
+    public enum Texts
+    {
+        FrontText,
+        KillCountText,
     }
 
     public enum PlayerHPBar

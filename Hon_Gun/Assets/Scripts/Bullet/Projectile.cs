@@ -5,11 +5,10 @@ public abstract class Projectile : MonoBehaviour
     [SerializeField]
     protected float moveVelocity;
     [SerializeField]
-    protected float lifeDistance;
-    [SerializeField]
     protected Vector2 startPos;
     [SerializeField]
-    protected LayerMask targetLayer;
+    private LayerMask targetLayer;
+    
 
     [SerializeField]
     private int damage;
@@ -29,10 +28,6 @@ public abstract class Projectile : MonoBehaviour
     protected virtual void Update()
     {
         var distance = Vector2.Distance(startPos, transform.position);
-        if(distance >= lifeDistance)
-        {
-            ReturnObject();
-        }
     }
 
     protected virtual void FixedUpdate()
@@ -52,19 +47,30 @@ public abstract class Projectile : MonoBehaviour
 
         moveVelocity = _velocity;
         targetLayer = _layerMask;
-        lifeDistance = _distance;
     }
 
     // <summary>
     /// 투사체의 Trigger에 다른 collider가 닿은 경우에 처리.
     /// </summary>
-    protected abstract void OnEnterProcess(Collider2D other);
+    protected abstract void OnEnterProcess(Collision other);
 
-    protected void OnTriggerEnter2D(Collider2D other)
+    //protected void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.layer == Util.MaskToLayer(targetLayer))
+    //    {
+    //        OnEnterProcess(other);
+    //    }
+    //}
+
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.layer == Util.MaskToLayer(targetLayer))
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Wall") ||
+            other.gameObject.layer == LayerMask.NameToLayer("Player") ||
+            other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
             OnEnterProcess(other);
+        }
     }
 
-   
 }

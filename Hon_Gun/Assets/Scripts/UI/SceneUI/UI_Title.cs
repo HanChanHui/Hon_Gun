@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using TMPro;
+
 
 
 
@@ -16,10 +16,10 @@ public class UI_Title : UI_Scene
         base.Init();
 
         Bind<Image>(typeof(TitleImages));
-        Bind<TextMeshProUGUI>(typeof(TextMeshProUGUIs));
+        Bind<Text>(typeof(Texts));
         Bind<Button>(typeof(Buttons));
 
-        GetText((int)TextMeshProUGUIs.FrontImage).gameObject.SetActive(true);
+        GetText((int)Texts.FrontText).gameObject.SetActive(true);
         GetImage((int)TitleImages.BackgroundImg).gameObject.SetActive(true);
         GetButton((int)Buttons.StartBtn).gameObject.SetActive(true);
         GetButton((int)Buttons.StartBtn).gameObject.AddUIEvent(SetPresstoStart);

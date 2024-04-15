@@ -22,15 +22,23 @@ public partial class Enemy : Entity
 
     private void RangeAttack()
     {
+        
         time -= Time.deltaTime;
         if (time > 0 ) { return; }
 
         time = stat.Reloading;
 
-        Debug.Log("АјАн");
+        
         var bullet = Instantiate(bulletPrefab, bulletPos.transform.position, bulletPos.transform.rotation).GetComponent<Projectile>();
         bullet.Damage = stat.Damage;
         bullet.SetupProjectile(targetLayer, (int)stat.AttackSpeed, 15f);
+        anim.SetBool("IsMoveAttack", true);
+        Invoke("AtkAnim", 0.5f);
+    }
+
+    private void AtkAnim()
+    {
+        anim.SetBool("IsMoveAttack", false);
     }
 
 

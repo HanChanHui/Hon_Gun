@@ -7,6 +7,20 @@ using UnityEngine.AI;
 
 public partial class Enemy : Entity
 {
+    [SerializeField]
+    private Animator anim;
+    public Animator Anim
+    {
+        get
+        {
+            if (anim == null)
+            {
+                anim = GetComponent<Animator>();
+            }
+            return anim;
+        }
+    }
+
     private NavMeshAgent agent;
 
     private GameObject target;
@@ -25,11 +39,7 @@ public partial class Enemy : Entity
         if(distance >= attackRange)
         {
             state = States.Move;
-        }
-        else
-        {
-            state = States.Attack;
-        }
+        } 
     }
 
     private void TypeMovement(EnemysType _enemyType)
@@ -73,11 +83,14 @@ public partial class Enemy : Entity
 
             if (distance < attackRange)
             {
+                anim.SetBool("IsWalk", false);
                 agent.isStopped = true;
                 agent.speed = 0;
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 10 * Time.deltaTime);
             }
             else
             {
+                anim.SetBool("IsWalk", true);
                 agent.isStopped = false;
                 agent.speed = stat.MoveSpeed;
                 agent.SetDestination(endPos);
@@ -119,7 +132,7 @@ public partial class Enemy : Entity
             transform.GetComponent<CapsuleCollider>().enabled = false;
             Destroy(gameObject);
             stat.HP = 0;
-            //Managers.UI.ShowPopupUI<>();
+            GameManager.Instance.Despawn(gameObject);
         }
     }
 }

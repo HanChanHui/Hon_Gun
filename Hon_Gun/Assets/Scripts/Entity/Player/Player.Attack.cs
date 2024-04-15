@@ -27,6 +27,7 @@ public partial class Player : Entity
             var bullet = Instantiate(bulletPrefab, bulletPos.transform.position, bulletPos.transform.rotation).GetComponent<Projectile>();
             bullet.Damage = stat.Damage;
             bullet.SetupProjectile(targetLayer, (int)stat.AttackSpeed, 15f);
+            anim.SetTrigger("IsAttack");
         }
     }
 
